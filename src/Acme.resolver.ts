@@ -1,8 +1,11 @@
 import {Resolver, Query, Args, Subscription} from "@nestjs/graphql";
 import {Acme} from "./Acme";
 import {AcmeError} from "./AcmeError";
+import {UseFilters} from "@nestjs/common";
+import {AcmeExceptionFilter} from "./AcmeExceptionFilter";
 
 @Resolver('Acme')
+@UseFilters(AcmeExceptionFilter)
 export class AcmeResolver {
 	@Query()
 	async acme(@Args('id') id: number): Promise<Acme> {
