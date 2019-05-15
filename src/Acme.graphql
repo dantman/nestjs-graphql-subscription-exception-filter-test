@@ -1,0 +1,8 @@
+type Acme {
+	id: Int!
+	title: String!
+}
+
+type Query {
+	acme(id: Int!): Acme!
+}
