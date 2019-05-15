@@ -6,3 +6,7 @@ type Acme {
 type Query {
 	acme(id: Int!): Acme!
 }
+
+type Subscription {
+  watchAcme(id: Int!): Acme!
+}

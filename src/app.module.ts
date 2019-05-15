@@ -8,6 +8,7 @@ import { AppService } from './app.service';
   imports: [
     GraphQLModule.forRoot({
       typePaths: ['./**/*.graphql'],
+      installSubscriptionHandlers: true,
       debug: true,
       playground: true
     })

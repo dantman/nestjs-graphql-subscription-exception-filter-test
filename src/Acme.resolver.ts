@@ -1,4 +1,4 @@
-import {Resolver, Query, Args} from "@nestjs/graphql";
+import {Resolver, Query, Args, Subscription} from "@nestjs/graphql";
 import {Acme} from "./Acme";
 import {AcmeError} from "./AcmeError";
 
@@ -8,6 +8,15 @@ export class AcmeResolver {
 	async acme(@Args('id') id: number): Promise<Acme> {
 		if (id === 1) {
 			return new Acme(1, 'Test');
+		} else {
+			throw new AcmeError(`No acme #${id}`);
+		}
+	}
+
+	@Subscription(returns => Acme, {resolve: (acme: any): any => acme})
+	async *watchAcme(@Args('id') id: number): AsyncIterable<Acme> {
+		if (id === 1) {
+			yield new Acme(1, 'Test');
 		} else {
 			throw new AcmeError(`No acme #${id}`);
 		}
